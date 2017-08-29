@@ -221,7 +221,7 @@
 	     key和value  是唯一的  没有重复的值
 	     
 	     
-	     const a= new Set([1,2,3])
+	     const s= new Set([1,2,3])
 	     
 	     console.log(s)//{1,2,3}
 	     
@@ -268,23 +268,264 @@
 			
 			
 			
+	    数据结构 map
+	    
+	    
+	        javascript中对象 只能用字符串当做键;
+	        
+	        为了解决这一问题  es6 提供了map的数据结构 他类似于对象  也是键值对的集合  但是键的范围不局限于字符串,各种类型的值都可以当做建
+	        
+	        如何创建一个map
+	        
+	        
+	        const map=new Map();
+	        
+	        
+	        可以接收二维数组
+	        
+	        
+	        const map= new Map([
+	        		["a",1],
+	        		["b",2]
+	        ])
+	     
+	        console.log(map)  //{"a"=>1,"b"=>2}
+	        
+	        属性
+	        
+	     	console.log(map.size)//表示当前这个对象内部的元素的个数  
+	     	
+	   map的方法
+	   
+	      map.set("miaov","课堂")//这样就把这个值添加到了 map这个对象当中了   并且不会重复  如果重复 后边的会把前边的覆盖掉
+	                key    value
+	      
+	     
+	     map.get("miaov") //获取到这个键对应的value值        如果没有返回的是undefiend
+	     
+	     
+	     map.delete("miaov")//删除某个键  如果删除成功返回的是true
+	     
+	     map.has("miaov")//判断的这个键是否存在如果存在则是true
+      
+      
+        map.clear()//清空 map当中的所有属性
+        
+        
+        map.keys()//返回所有的键名
+        
+        
+        map.values()//遍历所有键值的
+        
+        
+        map.entries()//遍历的是键值对的
+        
+        map.forEach(function(key,value,map){
+        	......
+        })
+        
+        
+        map中认为 NaN 是相等的
+        
+        
+	     map中他们认为 如果内存地址不一样视为两个键
+	     
+	     
+	     例
+	     {}=x
+	     {}=y
+	     
+	     他们两个是两个空对象  是不一样的
+	     
+	     
+	     空对象和空对象比较是false  不相等
+	     
+	 key的顺序是按照添加的顺序排列的
+	 
+	 
+	 Iterator  为各种不同的数据结构提供统一的访问机制 任何数据结构只要部署了 Iterator 接口的就可以完成遍历的操作 而且这种的
+	 
+	 遍历操作时依次处理该数据结构的所有成员
+	 
+	 
+	 新增的  for --of 的循环
+	 
+	 
+	 const arr=[1,2,3]
+	 
+	 
+	 function Iterator(){
+	 	
+	 	let index=0;
+	 	
+	 	return {
+	 		next:function(){
+	 			return index <arr.length?
+	 				{value:arr[index++],done:false}:
+	 				{value:undefined,done:true}
+	 		}
+	 	}
+	 }
+	     
+	     
+	const it=Iterator(arr)
+	
+	
+	console.log(it.next())//{value:1,done:false}
+	console.log(it.next())//{value:2,done:false}
+	console.log(it.next())//{value:3,done:false}
+	console.log(it.next())//{value:undefined,done:true}
+	
+	
+	
+	es6
+	
+	凡是具有symbol.iterator 属性的数据就会有 Iterator的就口
+	
+	
+	
+	
+	
+	const arr=[1,2,3]
+	
+	const set =new Set([a,b,c])
+	
+	const map=new Map([[a,1]]);
+	
+	
+	const itArr=arr[Symbol.iterator]();
+	const itSet=set[Symbol.iterator]();
+	const itMap=map[Symbol.iterator]();
+	
+	
+	console.log(itArr)
+	console.log(itSet)
+	console.log(itMap)
+	
+	
+	
+	console.log(itSet.next()){value:a,done:false}
+	console.log(itSet.next()){value:b,done:false}
+	console.log(itSet.next()){value:c,done:false}
+	console.log(itSet.next()){value:undefiend,done:false}
+	
+	
+	iterator  本身就是数据结构所具有的 属性 并且他的结构 和next 的方法 本身就是具备的  切返回的结构也是固定的
+	
+	
+	如果返回done是false 说名值还没有比遍历完成,如果返回的是true  就是已经完成了
+	
+	
+	const obj ={}
+	
+	console.log(obj[Symbol.iterator])//不存在
+	
+	
+	
+	凡是具有  iterator 接口的 都可以结构赋值
+	
+	
+	let [x,y]=set
+	
+	console.log(x,y)//a b
+	
+	
+	
+	let str="miaov";
+	
+	let arrStr=[...str];
+	
+	console.log(arrStr)// [ "m" "i" "a" "o" "v"]   扩展运算符   用这种方法  就把这个字符串转化成为了 一个数组  分解了
+	
+	
+	
+	const arr2=[{},"1","a",1,"a","c",[]];
+	
+	
+	console.log([...new Set(arr2)])//这就出来的是 去重后的数组
+	
+	
+	
+	for....of
+	
+	
+	const ofArr=[1,2,3,4];
+	
+	for(let i of ofArr){
+		
+		console.log(i)//是这个数组中的每一项的值
+		
+	}
+	
+	
+	
+	
+	const m=new Map();
+	
+	
+	m.set('a',1).set("b",2).set("c",3)
+	
+	for(let [key,value] of m){
+		console.log(key,value)
+	}
+	
+	
+	
+	class 应用
+	
+	class Miaov{
+		constructor(a,b){
+			this.a=a;
+			this.b=b;
+			return this;
+		}
+		
+		print(){
+			console.log(this.a+this.b)
+		}
+		
+		print1(){
+			console.log(this.a+1)
+		}
+	}
+	
+	const miaov= new Miaov("hello","world").print();
+	
+	
+	
+	
+	类中的方法与方法之间不用逗号隔开
+	
+	也不用 function 
+	
+	直接函数名+(){}   就可以了
+	
+	
+	
+	
+	其实 这些定义的方法 还是定义在pototype上的只是写法不一样了
+	
+	
+	生成类 必须用new
+	
+	
+	   
+	class 类的继承
+	
+	
+	class App{
+		
+	}
+	
+	     
+	class Appone extends App{
+		constructor(x,p,r){
 			
-	     
-	     
-	     
-	     
-	     
-	     
-	     
-	     
-	     
-	     
-	     
-	     
-	     
-	     
-	     
-	     
+			super(x,p,r)//继承父类的属性   ES6中 如果没有调用super  子类是没有 属性的  也可以继承静态的方法
+			
+			this.h=9;
+		}
+	}
 	     
 	     
 	     
