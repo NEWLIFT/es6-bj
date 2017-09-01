@@ -528,16 +528,247 @@
 	}
 	     
 	     
+	 Symbal  是基本数据类型的一种
+	 
+	     使用函数调用生成 symbal 数据
+	     
+	     例   let t1=Symbal()
 	     
 	     
+	
+	     
+	     
+	内置对象的扩展
+	
+	
+	    字符串的扩展
+	     
+	     let html=`<ul>
+	     	<li>${'首页'}</li>//这样字符串就拼接完成
+	     	<li class="${flag?'show':'hide'}"></li>
+	     </ul>`
+	     
+	     
+	     
+	     
+	     
+	     repeat
+	    
+	    重复 
+	    
+	    let str1="1";
+	    
+	    let str2=str1.repeat(3)//重复  里面的参数是重复几次
+	    
+	    console.log(str2)//'111'
+	    
+	
+	      
+	    let str="miaov";
+	    
+	    console.log(str.includes("ao"))//如果找到则返回的是true
+	    
+	    console.log(str.startsWith("a"))//查找是否开头包含a如果包含则返回的是true  如果不是则返回false
+	    
+	    console.log(endsWith("aoo"))//如果结尾包含aoo返回的是true  否则返回的是false 
 	      
 	      
 	      
-	      
-	      
-	      
+	     数组的扩展
+	     
+	     
+	     Array.from();
+	     
+	     他是把类数组 转化为数组  他接收的是 返回值
+	     
+	     
+	     
+	     Array.of()
+	     
+	     用来创建数组
+	     
+	     const arr= Array.of(1)
+	     
+	     
+	     
+	     find()
+	     
+	     返回数组中符合条件的元素  中的第一个  如果不符合返回 undefiend
+	     
+	     let arr =[1,2,3,4]
+	     
+	     let res=arr.find(function(a){
+	     	return a<2
+	     		
+	    	     })
+	    	     
+	    let res = arr.findIndex(function(a){
+	    	return a<2;	    	
+	    })//这边是返回的是下标
+	    
+	    
+	    如果没有返回的是 -1;
+	    
+	    
+	    fill();
+	    
+	    
+	    const arr = [1,3,4,5];
+	    
+	    arr.fill('abc')//是把数组中的所有元素替换为 abc
+	    
+	    还可以从哪里开始替换  替换为什么
+	    
+	    arr.fill("abc",1,3)//从下标1开始 替换到3  不包含三
+	    
+	    
+	    
+	     
+	    对象的扩展
+	    
+	       let a=1;
+	       
+	       const obj={
+	       	a:a
+	       }
+	       
+	     	{a:1}
 	     	
-	     	
+	     es6 中诶过如果下表和 值一样 就可以简写
+	     
+	     const obj={a}
+	     
+	     
+	     对象的方法
+	     
+	     const obj={
+	     	fns(){
+	     		console.log(1)
+	     	}
+	     }
+	     
+	     
+	     
+	     object.is();
+	     
+	     判断两个对象是否一样
+	     
+	     Object.is(1,1)//这两个长的一样就想等
+	     
+	     
+	     Object.assign();
+	     
+	     let obj1={a:1};
+	     let obj2={a:2,b:3};
+	     let obj3={c:1};
+	     
+	     
+	      Object.assign(obj1,obj2.obj3);//obj1 是目标对象  把obj2和obj3 合并到obj1中  如果 有相同的元素会覆盖
+	     
+	     
+	     
+	     
+	    函数的扩展
+	    
+	    1.函数的默认值
+	    
+	    
+	    function fn(a=10,b=20){
+	    	console.log(a+b)
+	    }//es6的参数
+	    
+	    
+	    2.rest 参数形式  用于获取多余的参数
+	    
+	    
+	    function b(b,...arr){
+	    	console.log(b+arr)
+	    }
+	     
+	     
+	    b(10,1,2,3,4)//在rest参数形式之后不允许在传参数了
+	    
+	    
+	    使用箭头函数
+	    
+	    const fn=a=>a;
+	    
+	    
+	 	类似
+	 	
+	 	const fn2=function(a){
+	 	    return a;
+	 	    
+	 	}
+	 	
+	 	
+	 	const fn =(a,b)=>{
+	 		a=a*2;
+	 		b=b*2
+	 		return a+b;
+	 	}
+	 	
+	     
+	     
+	     如果想要 返回的是一个对象
+	     
+	     
+	     const fn=(a,b)=>({a,b});
+	     
+	     
+	     
+	  箭头环境 没有自己的this  对象
+	  
+	不能使用 call  apply   bind  来改变this的指向
+	
+	  
+	没有 arguments 对象   如果使用使用rest参数代替
+	
+	
+	箭头函数不能使用new
+	
+	
+	promise    这是一个异步编程的解决方案
+	
+	
+	
+	new Promise()//new 出来的   
+	
+	
+
+	promise 的状态不能变化  成功就是成功失败就是失败
+	
+	
+	const p=new Promise(function(resolve,reject){
+		//第一个参数是成功
+		
+		const img = new Image();
+		
+		img.src = img[0];
+		
+		img.onload=function(){
+			resolve(this)
+		}
+		
+		img.onerror=function(){
+			reject(new Error("失败"))
+		}
+		
+		//第二个是成功
+	})
+	
+	p.then(function(){
+		//执行成功 后执行的函数
+	})
+	
+	p.catch(function(){
+		//执行失败后执行的函数
+	})
+	     
+	     
+	     
+	     
+	     
 	     	
 	     	
 	     	
